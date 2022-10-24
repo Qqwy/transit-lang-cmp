@@ -25,7 +25,7 @@ main :: IO ()
 main = do
     trips <- fetchTrips
     stop_times <- fetchStopTimes
-    Web.Scotty.scotty 3000 $ do
+    Web.Scotty.scotty 4000 $ do
         Web.Scotty.get "/schedules/:route_id" (getRouteScheduleA trips stop_times)
 
 
@@ -70,16 +70,18 @@ fetchStopTimes =
 
 fetchOrExit :: Data.Csv.FromNamedRecord a => String -> (a -> Text) -> IO (Datastore a)
 fetchOrExit filename selector = do
+    putStrLn ("Fetching " <> filename <> "...")
+
     contents <- Data.ByteString.Lazy.readFile filename
     case Data.Csv.decodeByName contents of
         Left problem -> do
             putStrLn problem
             System.Exit.exitFailure
 
-        Right (_headers, vals) ->
-            vals
-            |> vecToMap selector
-            |> pure
+        Right (_headers, vals) -> do
+            let result = vals |> vecToMap selector
+            putStrLn ("Fetching " <> filename <> " done!")
+            pure result
 
 vecToMap :: (a -> Text) -> Vector a -> HashMap Text (Vector a)
 vecToMap selector vec =
