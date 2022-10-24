@@ -23,6 +23,7 @@ dependencies:
 - base >= 4.7 && < 5
 - bytestring
 - text
+- text-short
 - containers
 - cassava
 - vector
@@ -40,6 +41,7 @@ ghc-options:
 - -Wmissing-home-modules
 - -Wpartial-fields
 - -Wredundant-constraints
+- -O2
 
 default-extensions:
 - DeriveGeneric

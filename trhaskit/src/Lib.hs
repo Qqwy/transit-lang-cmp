@@ -11,6 +11,7 @@ import Data.Csv (ToNamedRecord, FromNamedRecord)
 import Data.Aeson (ToJSON(..), FromJSON, genericToEncoding, defaultOptions)
 import Data.Vector (Vector)
 import Data.Text (Text)
+import Data.Text.Short (ShortText)
 import Data.Text qualified
 
 someFunc :: IO ()
@@ -18,10 +19,10 @@ someFunc = putStrLn "someFunc"
 
 
 data StopTime = StopTime {
-        trip_id :: !Text,
-        stop_id :: !Text,
-        arrival_time :: !Text,
-        departure_time :: !Text
+        trip_id :: !ShortText,
+        stop_id :: !ShortText,
+        arrival_time :: !ShortText,
+        departure_time :: !ShortText
     }
     deriving (Generic, Show)
 
@@ -33,9 +34,9 @@ instance ToJSON StopTime where
 instance FromJSON StopTime
 
 data Trip = Trip {
-        route_id :: !Text,
-        service_id :: !Text,
-        trip_id :: !Text
+        route_id :: !ShortText,
+        service_id :: !ShortText,
+        trip_id :: !ShortText
     }
     deriving (Generic, Show)
 
@@ -47,9 +48,9 @@ instance ToJSON Trip where
 instance FromJSON Trip
 
 data ScheduleResponse = ScheduleResponse {
-        trip_id :: !Text,
-        service_id :: !Text,
-        route_id :: !Text,
+        trip_id :: !ShortText,
+        service_id :: !ShortText,
+        route_id :: !ShortText,
         schedules :: !(Vector StopTime)
     }
     deriving (Generic, Show)
