@@ -22,11 +22,13 @@ description:         Please see the README on GitHub at <https://github.com/gith
 dependencies:
 - base >= 4.7 && < 5
 - bytestring
+- text
 - containers
 - cassava
 - vector
 - unordered-containers
 - scotty
+- aeson
 
 ghc-options:
 - -Wall
@@ -43,6 +45,7 @@ default-extensions:
 - DeriveGeneric
 - ApplicativeDo
 - OverloadedStrings
+- OverloadedLists
 - ImportQualifiedPost
 - NoMonomorphismRestriction
 - TypeApplications

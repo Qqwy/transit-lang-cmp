@@ -35,6 +35,7 @@ library
       DeriveGeneric
       ApplicativeDo
       OverloadedStrings
+      OverloadedLists
       ImportQualifiedPost
       NoMonomorphismRestriction
       TypeApplications
@@ -43,11 +44,13 @@ library
       DuplicateRecordFields
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , cassava
     , containers
     , scotty
+    , text
     , unordered-containers
     , vector
   default-language: Haskell2010
@@ -62,6 +65,7 @@ executable trhaskit-exe
       DeriveGeneric
       ApplicativeDo
       OverloadedStrings
+      OverloadedLists
       ImportQualifiedPost
       NoMonomorphismRestriction
       TypeApplications
@@ -70,11 +74,13 @@ executable trhaskit-exe
       DuplicateRecordFields
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , cassava
     , containers
     , scotty
+    , text
     , trhaskit
     , unordered-containers
     , vector
@@ -91,6 +97,7 @@ test-suite trhaskit-test
       DeriveGeneric
       ApplicativeDo
       OverloadedStrings
+      OverloadedLists
       ImportQualifiedPost
       NoMonomorphismRestriction
       TypeApplications
@@ -99,11 +106,13 @@ test-suite trhaskit-test
       DuplicateRecordFields
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , cassava
     , containers
     , scotty
+    , text
     , trhaskit
     , unordered-containers
     , vector

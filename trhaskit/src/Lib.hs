@@ -1,44 +1,60 @@
 module Lib
     ( someFunc,
     StopTime(..),
-    Trip(..)
+    Trip(..),
+    ScheduleResponse(..)
     ) where
 
 import Control.Applicative
 import GHC.Generics (Generic)
 import Data.Csv (ToNamedRecord, FromNamedRecord)
-
-import Data.ByteString (ByteString)
-import Data.ByteString qualified
+import Data.Aeson (ToJSON(..), FromJSON, genericToEncoding, defaultOptions)
+import Data.Vector (Vector)
+import Data.Text (Text)
+import Data.Text qualified
 
 someFunc :: IO ()
 someFunc = putStrLn "someFunc"
 
 
 data StopTime = StopTime {
-        trip_id :: !ByteString,
-        stop_id :: !ByteString,
-        arrival_time :: !ByteString,
-        departure_time :: !ByteString
+        trip_id :: !Text,
+        stop_id :: !Text,
+        arrival_time :: !Text,
+        departure_time :: !Text
     }
     deriving (Generic, Show)
 
 instance FromNamedRecord StopTime
 instance ToNamedRecord StopTime
+instance ToJSON StopTime where
+    toEncoding = genericToEncoding defaultOptions
+
+instance FromJSON StopTime
 
 data Trip = Trip {
-        route_id :: !ByteString,
-        service_id :: !ByteString,
-        trip_id :: !ByteString
+        route_id :: !Text,
+        service_id :: !Text,
+        trip_id :: !Text
     }
     deriving (Generic, Show)
 
 instance FromNamedRecord Trip
 instance ToNamedRecord Trip
+instance ToJSON Trip where
+    toEncoding = genericToEncoding defaultOptions
 
--- instance FromNamedRecord Trip where
---     parseNamedRecord r = 
---         pure Trip
---         <*> r .: "route_id" 
---         <*> r .: "service_id" 
---         <*> r .: "trip_id"
+instance FromJSON Trip
+
+data ScheduleResponse = ScheduleResponse {
+        trip_id :: !Text,
+        service_id :: !Text,
+        route_id :: !Text,
+        schedules :: !(Vector StopTime)
+    }
+    deriving (Generic, Show)
+
+instance ToJSON ScheduleResponse where
+    toEncoding = genericToEncoding defaultOptions
+
+instance FromJSON ScheduleResponse
